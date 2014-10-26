@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'ghoti'
+
+Ghoti::App.new(ARGV).run
