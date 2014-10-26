@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+module Ghoti
+  module Theme
+    FOREGROUND_COLOR = '#00ff00'
+    BACKGROUND_COLOR = '#000000'
+
+    SELECTED_FOREGROUND_COLOR = BACKGROUND_COLOR
+    SELECTED_BACKGROUND_COLOR = FOREGROUND_COLOR
+  end
+end
