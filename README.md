@@ -1,5 +1,11 @@
 # Ghoti - GitHub command line issues browser
 
+# What's with the name?
+
+It's something like **G**it**H**ub **O**ffline **T**hing for **I**ssues.
+
+http://en.wikipedia.org/wiki/Ghoti
+
 # Screens
 
 ## Main Screen
@@ -37,3 +43,12 @@ Shows the currently selected issues view.
 
   - Coloration of issues based on label
   - Layout of issue details
+
+# Syncing
+
+  - Sync issues (how to only grab changes?)
+  - Sync comments
+
+# The Future!
+
+  - A dashboard for *all* your repositories
