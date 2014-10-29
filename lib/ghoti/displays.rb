@@ -33,11 +33,37 @@ module Ghoti
 
       attr_accessor :view
       attr_accessor :offset
-      attr_accessor :selected
+      attr_reader :selected
 
       def initialize
-        self.offset   = 0
-        self.selected = 0
+        self.offset = 0
+        @selected   = 0 # can't use the accessor until we have a view
+      end
+
+      def clamp(value, range)
+        if value < range.min
+          range.min
+        elsif value > range.max
+          range.max
+        else
+          value
+        end
+      end
+
+      def make_selection_visible(index)
+        interface_end = use(:issues_list).height + offset
+
+        if index < offset then
+          offset = index
+        elsif index >= interface_end
+          offset = index - use(:issues_list).height + 1
+        end
+      end
+
+      def selected=(new_selection)
+        new_selection = clamp new_selection, 0 ... @view.length
+        make_selection_visible new_selection
+        @selected = new_selection
       end
 
       def draw
