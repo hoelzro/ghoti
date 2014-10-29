@@ -44,6 +44,8 @@ module Ghoti
     end
 
     def define_keys
+      issues_list = @displays.get_display :issues_list
+
       keys :issues_list do
         key 'h', '?' do
           # show help
@@ -73,11 +75,13 @@ module Ghoti
         end
 
         key 'j' do
-          # move down
+          issues_list.selected += 1
+          trigger :redraw
         end
 
         key 'k' do
-          # move up
+          issues_list.selected -= 1
+          trigger :redraw
         end
 
         key :enter do
