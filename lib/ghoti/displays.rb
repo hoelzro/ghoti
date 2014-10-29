@@ -30,6 +30,54 @@ module Ghoti
 
     class IssuesList
       include DisplayBehavior
+
+      attr_accessor :view
+      attr_accessor :offset
+      attr_accessor :selected
+
+      def initialize
+        self.offset   = 0
+        self.selected = 0
+      end
+
+      def draw
+        true_self = self
+
+        render do
+          view :issues_list do
+            interface_end = use(:issues_list).height + true_self.offset
+
+            true_self.view.each_with_index do |issue, index|
+              # XXX let's add a method for telling the view to
+              #     start at a particular offset...
+              if index < true_self.offset then
+                next
+              end
+
+              if index >= interface_end then
+                break
+              end
+
+              line do
+                if index == true_self.selected then
+                  stream do
+                    colour foreground: Theme::SELECTED_FOREGROUND_COLOR, background: Theme::SELECTED_BACKGROUND_COLOR
+                    text issue['title']
+                  end
+                else
+                  stream do
+                    colour foreground: Theme::FOREGROUND_COLOR, background: Theme::BACKGROUND_COLOR
+                    text issue['title']
+                  end
+                end
+              end
+            end
+          end
+
+          view :prompt do
+          end
+        end
+      end
     end
 
     class IssueDetail
