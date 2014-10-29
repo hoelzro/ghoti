@@ -104,6 +104,7 @@ module Ghoti
       event :_initialize_ do
         @displays.show :issues_list
         @displays.draw
+        focus :issues_list
       end
 
       event :redraw do
