@@ -36,6 +36,18 @@ module Ghoti
           end
         end
       end
+
+      def length
+        length = 0
+
+        model.each do |issue|
+          if filter_issue issue then
+            length += 1
+          end
+        end
+
+        length
+      end
     end
 
     class OpenOnly
