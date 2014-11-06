@@ -1,11 +1,13 @@
 #!/usr/bin/env ruby
 
 require 'ghoti/theme'
+require 'ghoti/viewport'
 
 module Ghoti
   module Displays
     module DisplayBehavior
       include Vedeu
+      include Ghoti::Viewport
 
       def modal?
         false
@@ -70,20 +72,10 @@ module Ghoti
         true_self = self
 
         render do
-          view :issues_list do
-            interface_end = use(:issues_list).height + true_self.offset
-
+          # XXX how can we get the model and the viewport to talk so that
+          #     we're not fetching rows we're just going to discard?
+          viewport :issues_list, true_self.offset do
             true_self.view.each_with_index do |issue, index|
-              # XXX let's add a method for telling the view to
-              #     start at a particular offset...
-              if index < true_self.offset then
-                next
-              end
-
-              if index >= interface_end then
-                break
-              end
-
               line do
                 if index == true_self.selected then
                   stream do
